@@ -269,40 +269,6 @@ void Sint64ToZStr(_Pre_writable_size_(64) TChar buf[64], PAL_Sint64 value, _Outp
     *result = p;
 }
 
-_Post_satisfies_(*size == _String_length_(*result))
-void Sint64ToZStr(_Pre_writable_size_(64) TChar buf[64], PAL_Sint64 value, _Outptr_result_z_ const TChar **result, _Out_opt_ size_t* size)
-{
-    TChar* p;
-
-    PAL_Boolean isNegative = PAL_FALSE;    
-    if(value < 0)
-    {
-        isNegative = 1;
-        value = -value;
-    }
-
-    p = &buf[63];
-    *p = PAL_T('\0');
-
-    do
-    {
-        *--p = PAL_T('0') + value % 10;
-    }
-    while (value /= 10);
-
-    if(isNegative)
-    {
-        *--p = PAL_T('-');
-    }
-
-    if(size)
-    {
-        *size = (PAL_Sint32)(&buf[63] - p);
-    }
-
-    *result = p;
-}
-
 int wcsncasecmp(const wchar_t* s1, const wchar_t* s2, size_t n)
 {
     wchar_t s1Char, s2Char;
