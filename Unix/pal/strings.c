@@ -8,6 +8,7 @@
 */
 
 #include "strings.h"
+#include <ctype.h>
 
 /* Strlcat and Strlcpy */
 #define DEST char
